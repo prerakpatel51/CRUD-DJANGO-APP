@@ -1,0 +1,58 @@
+{% extends 'mainapp/base.html'%}
+{% block content %}
+<div class="container mt-5 pt-5">
+    <h1 class="text-center mb-5">CRUD PROJECT</h1>
+
+    <div class="row">
+        <div class="col-sm-4 p-4 border">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <h3 class="text-center">Register </h3>
+                {{form.as_p}}
+                <input type="submit" class="btn btn-primary"  value="Submit">
+            </form>
+        </div>
+        <div class="col-sm-6 offset-1">
+            {%if user %}
+
+            <table class="text-white table border">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col" class="text-center">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for x in user%}
+                    <tr>
+                    <th scope="row">{{x.id}}</th>
+                    <td>{{x.name}}</td>
+                    <td>{{x.email}}</td>
+
+                    <td>{{x.password}}</td>
+                    <td><a href="{% url 'update' x.id %}" class="btn btn-danger">Edit</a></td>
+
+                    <td>
+                    <form action="{% url 'delete' x.id %}" method="post" >
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary" value="Delete">
+                    </form>
+                        
+                    </td>
+
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+{% else %}
+<h2>No Students here</h2>
+{% endif %}  
+</div>
+    </div>
+
+</div>
+{% endblock content %}

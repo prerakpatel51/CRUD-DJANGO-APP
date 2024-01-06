@@ -1,0 +1,13 @@
+{% extends 'mainapp/base.html'%}
+{% block content %}
+    <div class=" container mt-5 pt-5 ">
+        <form action="" method="POST"class='text-white form-control bg-dark'>
+            {% csrf_token %}
+            <h3>Update Student Information</h3>
+            {{form.as_p}}
+            <input type="submit" class="btn btn-primary"value="Update">
+<a href="{% url 'home' %}" class=" btn btn-primary">Back to home</a>
+        </form>
+
+    </div>
+{% endblock content %}
